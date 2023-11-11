@@ -2,7 +2,7 @@
 
 If you are familiar with Eclipse plugin development then you may want to checkout the source, setup the development environment, and start working with it. In this case you have the options described below.
 
-## Setting up the development environment using Oomph (recommended)
+## Setting up the development environment using Oomph (may not work anymore)
 
 1. Download the <a href="https://wiki.eclipse.org/Eclipse_Oomph_Installer" target="_blank">Oomph Eclipse Installer</a> for your platform and install it.
 2. Start Oomph by executing *eclipse-installer/eclipse-inst*.
@@ -24,18 +24,27 @@ If you are familiar with Eclipse plugin development then you may want to checkou
 18. Click *Proceed* three times in order to confirm the execution of each launch despite any existing errors.
 
 ## How to setup your developer workspace without Oomph
-1. Download latest Eclipse from https://www.eclipse.org/downloads/
-2. Install the latest Xtext release -> Help / Install new Software / select '2018-09 - http://download.eclipse.org/releases/2018-09'
+1. Download latest Eclipse from https://www.eclipse.org/downloads/ (e.g. Eclipse for Committers 2020-06)
+2. Install the latest Xtext release -> Help / Install new Software / select '2018-09 - http://download.eclipse.org/releases/2020-06'
     * Select *Modeling / Xtext Complete SDK*
 3. Select the Git perspective and clone the following Git Repository:
 https://github.com/Yakindu/statecharts.git
 Select 'Import projects' on the 'working directory' subfolder
-4. Set the target platform to `org.yakindu.base.target/2018-09.target`
+4. When importing the project, ingore the suggestions about "Marketplace solutions".
+5. Set the target platform to `org.yakindu.base.target/2020-06.target` (or `org.yakindu.base.target/2018-09.target`).
 Open the target file and click on the link for setting the target platform (takes some minutes the first time)
-5. Build the needed Xtext grammars by right-clicking the following files and choosing *Run As... => Generate Xtext Artifacts*:
-    1. `org.yakindu.base.expressions/Expressions.xtext`
-    1. `org.yakindu.sct.stext/SText.xtext`
-    1. `org.yakindu.sct.generator.genmodel/SGen.xtext`
-
+6. Build the needed Xtext grammars by right-clicking the following files and choosing *Run As... => Generate Xtext Artifacts*:
+    * `org.yakindu.base.expressions/Expressions.xtext`
+    * `org.yakindu.sct.model.stext/SText.xtext`
+    * `org.yakindu.sct.generator.genmodel/SGen.xtext`
+7. The project should now build without problems (except perhaps one `org.yakindu.sct.model.stext.test`, which seems harmless). If not, then try cleaning the project and/or repeating generating Xtext artifacts.
 
 After these steps, all projects should compile without errors. To launch a runtime instance which has these projects as installed plugins, just right-click on a project => Run As => Eclipse Application
+
+## Exporting the plug-ins
+
+* File => Export => Plug-in Development => Deployable features => Next
+* Select all features except `org.yakindu.sct.test`
+* Select "Archive file" and provide a file location and name with .zip suffix
+* Finish
+
